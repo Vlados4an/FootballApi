@@ -1,8 +1,9 @@
 package ru.erma.footballapplication.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
-import lombok.ToString;
+
 
 
 import java.util.List;
@@ -13,7 +14,7 @@ public class Team {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(length = 100)
+    @NotBlank(message = "Team name cannot be blank")
     private String teamName;
 
     @OneToMany(mappedBy = "team", cascade = CascadeType.ALL)

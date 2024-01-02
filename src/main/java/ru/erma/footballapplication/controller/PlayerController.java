@@ -1,5 +1,6 @@
 package ru.erma.footballapplication.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,12 @@ public class PlayerController {
         return ResponseEntity.ok(playerService.findStatisticsByPlayerName(name));
     }
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> createPlayer(@RequestBody PlayerDto playerDto){
+    public ResponseEntity<HttpStatus> createPlayer(@RequestBody @Valid PlayerDto playerDto){
         playerService.savePlayer(playerDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<PlayerDto> updatePlayer(@PathVariable Long id,@RequestBody PlayerDto playerDto){
+    public ResponseEntity<PlayerDto> updatePlayer(@PathVariable Long id,@RequestBody @Valid PlayerDto playerDto){
         playerService.updatePlayer(playerDto,id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

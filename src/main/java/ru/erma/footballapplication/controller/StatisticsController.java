@@ -1,5 +1,6 @@
 package ru.erma.footballapplication.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,14 +20,14 @@ public class StatisticsController {
         return ResponseEntity.ok(statisticsService.findAllStatistics());
     }
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> createStatistics(@RequestBody StatisticsDto statisticsDto){
+    public ResponseEntity<HttpStatus> createStatistics(@RequestBody @Valid StatisticsDto statisticsDto){
         statisticsService.saveStatistics(statisticsDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<HttpStatus> updateStatistics(
-            @RequestBody StatisticsDto statisticsDto,@PathVariable Long id){
+            @RequestBody @Valid StatisticsDto statisticsDto,@PathVariable Long id){
         statisticsService.updateStatisticsById(statisticsDto,id);
         return new ResponseEntity<>(HttpStatus.OK);
     }

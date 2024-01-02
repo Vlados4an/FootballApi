@@ -1,5 +1,6 @@
 package ru.erma.footballapplication.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class TeamController {
         return ResponseEntity.ok(teamService.findTeamById(id));
     }
     @PostMapping("/add")
-    public ResponseEntity<HttpStatus> createTeam(@RequestBody TeamDto teamDto){
+    public ResponseEntity<HttpStatus> createTeam(@RequestBody @Valid TeamDto teamDto){
         teamService.saveTeam(teamDto);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
